@@ -2,17 +2,57 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>QWeb Previewer - ALTEC</title>
+    <title>QWeb Previewer PRO - ALTEC Edition</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Highlight.js (coloration XML) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
 </head>
 <body>
 
-<h1>QWeb Previewer – ALTEC Edition</h1>
+<h1>QWeb Previewer <span class="pro">PRO</span> – ALTEC Edition</h1>
 
 <div class="container">
-    <textarea id="qwebInput" placeholder="Colle ici ton code QWeb (XML)…"></textarea>
-    <button onclick="previewQWeb()">Prévisualiser</button>
-    <iframe id="previewFrame"></iframe>
+
+    <div class="editor-area">
+        <h2>Code QWeb</h2>
+        <textarea id="qwebInput" placeholder="Colle ici ton code QWeb (XML)…"></textarea>
+        
+        <h2>Données Simulées (JSON)</h2>
+        <textarea id="jsonInput">
+{
+  "partner": {
+    "name": "Client Exemple",
+    "street": "Rue Exemple 12",
+    "city": "Namur",
+    "zip": "5000",
+    "phone": "081/12.34.56"
+  },
+  "subscription": {
+    "code": "SUB12345",
+    "salesperson": "Pascal BACCUS"
+  },
+  "lines": [
+    { "name": "Service ALTEC", "qty": 1, "price": 296.76 },
+    { "name": "Garde 24/7", "qty": 1, "price": 50.00 }
+  ]
+}
+        </textarea>
+
+        <button onclick="previewQWeb()">Générer l'Aperçu</button>
+        <button onclick="downloadHTML()">Exporter en HTML</button>
+        <button onclick="toggleDark()">Mode Sombre / Clair</button>
+    </div>
+
+    <div class="preview-area">
+        <h2>Aperçu (type Odoo PDF)</h2>
+        <iframe id="previewFrame"></iframe>
+    </div>
+
 </div>
 
 <script src="preview.js"></script>
