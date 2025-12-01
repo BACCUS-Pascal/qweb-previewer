@@ -3,10 +3,9 @@ function previewQWeb() {
     const xml = document.getElementById("qwebInput").value;
     const json = JSON.parse(document.getElementById("jsonInput").value);
 
-    // Step 1 — Replace simple placeholders {{xxx}}
     let rendered = xml;
 
-    // basic substitutions
+    // basic var replacements
     rendered = rendered
         .replace(/{{\s*partner\.name\s*}}/g, json.partner.name)
         .replace(/{{\s*partner\.street\s*}}/g, json.partner.street)
@@ -16,7 +15,7 @@ function previewQWeb() {
         .replace(/{{\s*subscription\.code\s*}}/g, json.subscription.code)
         .replace(/{{\s*subscription\.salesperson\s*}}/g, json.subscription.salesperson);
 
-    // Step 2 — Handle subscription lines {{ lines }}
+    // lines
     let linesHTML = "";
     json.lines.forEach(l => {
         linesHTML += `
@@ -29,7 +28,7 @@ function previewQWeb() {
     });
     rendered = rendered.replace(/{{\s*lines\s*}}/, linesHTML);
 
-    // Step 3 — Build the HTML output
+    // Build HTML
     const html = `
         <!DOCTYPE html>
         <html>
@@ -46,7 +45,6 @@ function previewQWeb() {
                 .altec-note-red {
                     background:#f8d7da; padding:10px; border-left:5px solid #dc3545; margin:10px 0;
                 }
-                h1, h2 { margin-top:25px; }
             </style>
         </head>
         <body>
@@ -55,13 +53,12 @@ function previewQWeb() {
         </html>
     `;
 
-    // Step 4 — Render in iframe
+    // Render in iframe
     const iframe = document.getElementById("previewFrame").contentWindow;
     iframe.document.open();
     iframe.document.write(html);
     iframe.document.close();
 }
-
 
 function downloadHTML() {
     const iframeDoc = document.getElementById("previewFrame").contentWindow.document.documentElement.outerHTML;
@@ -73,7 +70,6 @@ function downloadHTML() {
     a.download = "preview.html";
     a.click();
 }
-
 
 function toggleDark() {
     document.body.classList.toggle("dark-mode");
