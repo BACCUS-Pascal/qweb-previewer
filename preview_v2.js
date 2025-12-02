@@ -24,7 +24,7 @@ function previewQWeb() {
         .replace(/{{\s*partner\.zones\s*}}/g, json.partner?.zones || "")
         .replace(/{{\s*partner\.duration_initial\s*}}/g, json.partner?.duration_initial || "");
 
-    // Lignes du tableau
+    // Lignes de tableau
     let linesHTML = "";
     if (Array.isArray(json.lines)) {
         json.lines.forEach(l => {
@@ -38,7 +38,7 @@ function previewQWeb() {
     }
     rendered = rendered.replace(/{{\s*lines\s*}}/g, linesHTML);
 
-    // HTML final : une SEULE page, on ne coupe rien
+    // HTML final : UNE SEULE page, on ne coupe rien
     const html = `
     <html>
     <head>
@@ -63,7 +63,6 @@ function previewQWeb() {
     iframe.document.close();
 }
 
-// Export HTML
 function downloadHTML() {
     const iframeDoc = document.getElementById("previewFrame").contentWindow.document.documentElement.outerHTML;
     const blob = new Blob([iframeDoc], { type: "text/html" });
@@ -74,7 +73,6 @@ function downloadHTML() {
     a.click();
 }
 
-// Mode sombre
 function toggleDark() {
     document.body.classList.toggle("dark-mode");
 }
