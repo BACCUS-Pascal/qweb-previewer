@@ -1,41 +1,48 @@
 function previewQWeb() {
 
     const xml = document.getElementById("qwebInput").value;
-    const json = JSON.parse(document.getElementById("jsonInput").value);
+    let json = {};
+
+    try {
+        json = JSON.parse(document.getElementById("jsonInput").value);
+    } catch (e) {
+        alert("❌ JSON invalide.\nCorrige ton JSON avant de générer l’aperçu.");
+        return;
+    }
 
     let rendered = xml;
 
-    /* ====== SUBSTITUTE VARIABLES ====== */
+    /* ====== VARIABLES ====== */
     rendered = rendered
-        .replace(/{{\s*partner\.name\s*}}/g, json.partner.name)
-        .replace(/{{\s*partner\.street\s*}}/g, json.partner.street)
-        .replace(/{{\s*partner\.city\s*}}/g, json.partner.city)
-        .replace(/{{\s*partner\.zip\s*}}/g, json.partner.zip)
-        .replace(/{{\s*partner\.phone\s*}}/g, json.partner.phone)
-        .replace(/{{\s*subscription\.code\s*}}/g, json.subscription.code)
-        .replace(/{{\s*subscription\.salesperson\s*}}/g, json.subscription.salesperson);
+        .replace(/{{\s*partner\.name\s*}}/g, json.partner?.name || "")
+        .replace(/{{\s*partner\.street\s*}}/g, json.partner?.street || "")
+        .replace(/{{\s*partner\.city\s*}}/g, json.partner?.city || "")
+        .replace(/{{\s*partner\.zip\s*}}/g, json.partner?.zip || "")
+        .replace(/{{\s*partner\.phone\s*}}/g, json.partner?.phone || "")
+        .replace(/{{\s*subscription\.code\s*}}/g, json.subscription?.code || "")
+        .replace(/{{\s*subscription\.salesperson\s*}}/g, json.subscription?.salesperson || "");
 
-    /* ====== HANDLE LINES ====== */
+    /* ====== LIGNES ====== */
     let linesHTML = "";
-    json.lines.forEach(l => {
-        linesHTML += `
-        <tr>
-            <td>${l.name}</td>
-            <td class="text-center">${l.qty}</td>
-            <td class="text-right">${l.price.toFixed(2)} €</td>
-        </tr>`;
-    });
-
+    if (Array.isArray(json.lines)) {
+        json.lines.forEach(l => {
+            linesHTML += `
+            <tr>
+                <td>${l.name}</td>
+                <td class="text-center">${l.qty}</td>
+                <td class="text-right">${l.price.toFixed(2)} €</td>
+            </tr>`;
+        });
+    }
     rendered = rendered.replace(/{{\s*lines\s*}}/, linesHTML);
 
-    /* ====== FINAL HTML PAGE WRAPPER ====== */
+    /* ====== PAGE HTML ====== */
     const html = `
     <html>
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        
         <div class="page">
 
             <!-- Header -->
@@ -50,19 +57,18 @@ function previewQWeb() {
             <!-- Pagination -->
             <div class="page-number">Page 1 / 1</div>
         </div>
-
     </body>
     </html>
     `;
 
-    /* ====== RENDER INSIDE IFRAME ====== */
+    /* ====== RENDER ====== */
     const iframe = document.getElementById("previewFrame").contentWindow;
     iframe.document.open();
     iframe.document.write(html);
     iframe.document.close();
 }
 
-
+/* ====== EXPORT HTML ====== */
 function downloadHTML() {
     const iframeDoc = document.getElementById("previewFrame").contentWindow.document.documentElement.outerHTML;
     const blob = new Blob([iframeDoc], { type: "text/html" });
@@ -73,4 +79,7 @@ function downloadHTML() {
     a.click();
 }
 
-function toggleDark()
+/* ====== MODE SOMBRE ====== */
+function toggleDark() {
+    document.body.classList.toggle("dark-mode");
+}
