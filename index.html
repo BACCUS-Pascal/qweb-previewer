@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>QWeb Previewer PRO - ALTEC Edition</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Highlight.js (coloration XML) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
 </head>
 <body>
 
-<h1>QWeb Previewer <span class="pro">PRO</span> – ALTEC Edition</h1>
+<h1>QWeb Previewer PRO – ALTEC Edition</h1>
 
 <div class="container">
 
     <div class="editor-area">
         <h2>Code QWeb</h2>
-        <textarea id="qwebInput" placeholder="Colle ici ton code QWeb (XML)…"></textarea>
-        
+        <textarea id="qwebInput" style="width:100%;height:250px;"
+                  placeholder="Colle ici ton code QWeb (HTML)…"></textarea>
+
         <h2>Données Simulées (JSON)</h2>
-        <textarea id="jsonInput">
+        <textarea id="jsonInput" style="width:100%;height:200px;">
 {
   "partner": {
     "name": "Client Exemple",
     "street": "Rue Exemple 12",
     "city": "Namur",
     "zip": "5000",
-    "phone": "081/12.34.56"
+    "phone": "081/12.34.56",
+    "zones": "32",
+    "duration_initial": "2 ans"
   },
   "subscription": {
     "code": "SUB12345",
@@ -49,8 +45,7 @@
     </div>
 
     <div class="preview-area">
-        <h2>Aperçu (type Odoo PDF)</h2>
-        <iframe id="previewFrame"></iframe>
+        <iframe id="previewFrame" style="width:100%; height:100%; border:none;"></iframe>
     </div>
 
 </div>
