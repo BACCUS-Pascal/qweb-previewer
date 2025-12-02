@@ -89,3 +89,10 @@ th, td {
 /* Encadré rouge Facture */
 .altec-note-red {
     background:
+/* Agrandissement du viewer (iframe) */
+.preview-area iframe {
+    width: 100%;
+    height: calc(100vh - 120px);  /* plein écran */
+    border: 1px solid #ccc;
+    background: white;
+}
