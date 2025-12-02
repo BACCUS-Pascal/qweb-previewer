@@ -29,6 +29,12 @@ body {
     padding: 20px;
     box-sizing: border-box;
 }
+/* Centrage du contenu dans la zone preview */
+.preview-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 
 /* ================================
    IFRAME – LARGE, ZOOM AUTO
