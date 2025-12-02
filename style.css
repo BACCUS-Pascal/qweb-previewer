@@ -13,7 +13,7 @@ body {
 
 /* Zones gauche (éditeur) et droite (aperçu) */
 .editor-area {
-    width: 38%;
+    width: 30%;
     height: 100vh;
     overflow-y: scroll;
     padding: 20px;
@@ -22,7 +22,7 @@ body {
 }
 
 .preview-area {
-    width: 62%;
+    width: 70%;
     height: 100vh;
     overflow-y: auto;
     background: #e5e5e5;
