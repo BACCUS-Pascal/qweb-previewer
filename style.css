@@ -1,78 +1,45 @@
-/* ================================
-   GLOBAL PAGE STRUCTURE
-   ================================ */
-
 body {
+    background: #f0f0f0;
     margin: 0;
-    font-family: "Arial", sans-serif;
-    background: #e5e5e5;
+    font-family: Arial, sans-serif;
+}
+
+/* Mise en page générale */
+.container {
     display: flex;
     height: 100vh;
-    overflow: hidden;
 }
 
-/* Zones gauche (éditeur) et droite (aperçu) */
+/* Colonne de gauche : éditeur */
 .editor-area {
-    width: 30%;
-    height: 100vh;
-    overflow-y: scroll;
+    width: 35%;
     padding: 20px;
-    background: #fff;
-    border-right: 2px solid #ddd;
+    background: #ffffff;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
 }
 
+/* Colonne de droite : aperçu */
 .preview-area {
-    width: 70%;
-    height: 100vh;
-    overflow-y: auto;
-    background: #e5e5e5;
+    width: 65%;
     padding: 20px;
-    box-sizing: border-box;
-}
-/* Centrage du contenu dans la zone preview */
-.preview-area {
+    overflow-y: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
-/* ================================
-   IFRAME – LARGE, ZOOM AUTO
-   ================================ */
-
-.preview-area iframe {
-    width: 100%;
-    height: calc(100vh - 40px);
-    border: none;
-    background: #e5e5e5;
-}
-
-/* ================================
-   SIMULATION PAGE A4
-   ================================ */
-
+/* Simulation A4 */
 .page {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto 25px auto;
+    background: #fff;
+    width: 794px;
+    min-height: 1120px;
     padding: 20mm;
-    box-sizing: border-box;
-    background: white;
-    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     position: relative;
-    overflow: hidden;
 }
 
-/* MULTI-PAGES – coupe automatique */
-.page-break {
-    page-break-after: always;
-    break-after: page;
-}
-
-/* ================================
-   HEADER & FOOTER FIXES
-   ================================ */
-
+/* Header / Footer images */
 .header-img {
     width: 100%;
     max-height: 120px;
@@ -82,47 +49,27 @@ body {
 .footer-img {
     width: 100%;
     max-height: 80px;
-    position: absolute;
-    bottom: 15mm;
-    left: 0;
+    margin-top: 20px;
 }
 
-/* Numéro de page Odoo-like */
+/* Pagination */
 .page-number {
     position: absolute;
-    bottom: 5mm;
-    right: 15mm;
+    bottom: 10px;
+    right: 20px;
     font-size: 12px;
     color: #666;
 }
 
-/* ================================
-   TEXT & TITLES
-   ================================ */
-
-h1, h2 {
-    color: #333;
-    font-weight: 600;
-    margin-top: 25px;
-}
-
-p, li {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-/* ================================
-   TABLES
-   ================================ */
-
+/* Tableaux */
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
     margin-bottom: 15px;
 }
 
 th, td {
-    border: 1px solid #444;
+    border: 1px solid #000;
     padding: 6px;
     font-size: 13px;
 }
@@ -130,42 +77,23 @@ th, td {
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 
-/* ================================
-   ALERT BOXES
-   ================================ */
-
+/* Encadrés ALTEC */
 .altec-warning {
-    background:#ffeeba;
-    border-left:5px solid #ff9800;
-    padding:10px;
-    margin:15px 0;
+    background: #ffeeba;
+    border-left: 5px solid #ff9800;
+    padding: 10px;
+    margin: 15px 0;
 }
 
 .altec-note-red {
-    background:#ffcccc;
-    border-left:5px solid #e60000;
-    padding:10px;
-    margin:15px 0;
+    background: #f8d7da;
+    border-left: 5px solid #dc3545;
+    padding: 10px;
+    margin: 15px 0;
 }
 
-/* ================================
-   DARK MODE
-   ================================ */
-
-.dark-mode body {
-    background: #1e1e1e;
-}
-
-.dark-mode .editor-area {
-    background: #2a2a2a;
-    color: white;
-}
-
-.dark-mode textarea {
-    background: #1a1a1a;
-    color: white;
-}
-
-.dark-mode .preview-area {
-    background: #333;
+/* Mode sombre (si tu veux) */
+.dark-mode {
+    background: #222;
+    color: #eee;
 }
